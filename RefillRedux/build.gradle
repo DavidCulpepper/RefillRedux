@@ -4,9 +4,11 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:0.6.+'
+        classpath 'de.felixschulze.gradle:gradle-spoon-plugin:1.0.1+'
     }
 }
 apply plugin: 'android'
+apply plugin: 'spoon'
 
 repositories {
     mavenCentral()
@@ -19,6 +21,8 @@ android {
     defaultConfig {
         minSdkVersion 7
         targetSdkVersion 19
+        testInstrumentationRunner "runners.SpoonInstrumentationTestRunner"
+        testPackageName "com.praeses.refillredux.tests"
     }
     buildTypes {
         release {
@@ -45,8 +49,19 @@ android {
     }
 }
 
+spoon {
+    teamCityLog = true
+    debug = true
+    failOnFailure = false
+    testSizes = ['small', 'medium']
+    adbTimeout = 10*60
+    failIfNoDeviceConnected = false
+}
+
 dependencies {
     compile 'com.android.support:support-v4:19.0.0'
     compile 'com.android.support:appcompat-v7:19.0.0'
     compile 'com.jakewharton:butterknife:4.0.1'
+    instrumentTestCompile files('libs/espresso-1.0-SNAPSHOT-bundled.jar')
+    instrumentTestCompile 'com.squareup.spoon:spoon-client:1.1.0'
 }
