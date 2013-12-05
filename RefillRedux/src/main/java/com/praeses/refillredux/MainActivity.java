@@ -10,15 +10,30 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 
 public class MainActivity extends ActionBarActivity {
+
+    @InjectView(R.id.first_name) EditText firstName;
+    @InjectView(R.id.last_name) EditText lastName;
+    @InjectView(R.id.message) TextView message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.inject(this);
     }
 
+    @OnClick(R.id.say_hello)
+    void onSayHelloClicked() {
+        message.setText(getResources().getString(R.string.hello_message, firstName.getText(), lastName.getText()));
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

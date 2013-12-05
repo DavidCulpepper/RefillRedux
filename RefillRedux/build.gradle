@@ -39,10 +39,14 @@ android {
         green {
             packageName 'com.praeses.refillredux.green'
         }
+        purple {
+            packageName 'com.praeses.refillredux.purple'
+        }
     }
 }
 
 dependencies {
     compile 'com.android.support:support-v4:19.0.0'
     compile 'com.android.support:appcompat-v7:19.0.0'
+    compile 'com.jakewharton:butterknife:4.0.1'
 }
