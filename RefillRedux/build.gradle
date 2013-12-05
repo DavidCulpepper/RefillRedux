@@ -4,6 +4,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:0.6.+'
+        //make spoon work with gradle
         classpath 'de.felixschulze.gradle:gradle-spoon-plugin:1.0.1+'
     }
 }
@@ -21,7 +22,9 @@ android {
     defaultConfig {
         minSdkVersion 7
         targetSdkVersion 19
+        //our own test runner
         testInstrumentationRunner "runners.SpoonInstrumentationTestRunner"
+        //test apk's package name
         testPackageName "com.praeses.refillredux.tests"
     }
     buildTypes {
@@ -62,6 +65,7 @@ dependencies {
     compile 'com.android.support:support-v4:19.0.0'
     compile 'com.android.support:appcompat-v7:19.0.0'
     compile 'com.jakewharton:butterknife:4.0.1'
+    //libraries to compile for the test project
     instrumentTestCompile files('libs/espresso-1.0-SNAPSHOT-bundled.jar')
     instrumentTestCompile 'com.squareup.spoon:spoon-client:1.1.0'
 }
