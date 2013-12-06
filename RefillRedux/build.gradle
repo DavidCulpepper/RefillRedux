@@ -96,7 +96,7 @@ task spoonAllLinux(type:Exec) {
     list = list.substring(0, list.length() - 3)
     println list
     workingDir = '../'
-    commandLine sh, '-c', list
+    commandLine 'gradlew spoonRedTest'
 }
 
 
