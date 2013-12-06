@@ -1,3 +1,5 @@
+import groovy.io.FileType
+
 buildscript {
     repositories {
         mavenCentral()
@@ -57,7 +59,7 @@ spoon {
     debug = true
     failOnFailure = false
     testSizes = ['small', 'medium']
-    adbTimeout = 10*60
+    adbTimeout = 10 * 60
     failIfNoDeviceConnected = false
 }
 
@@ -68,4 +70,31 @@ dependencies {
     //libraries to compile for the test project
     instrumentTestCompile files('libs/espresso-1.0-SNAPSHOT-bundled.jar')
     instrumentTestCompile 'com.squareup.spoon:spoon-client:1.1.0'
+}
+
+task spoonAllWindows(type:Exec) {
+    def folder = "RefillRedux/src";
+    def baseDir = new File(folder);
+    def list = ""
+    baseDir.eachFile(FileType.DIRECTORIES) { dir ->
+        if (!dir.name.equals("instrumentTest") && !dir.name.equals("main"))
+            list += 'gradlew spoon' + dir.name.capitalize() + 'Test && '
+    }
+    list = list.substring(0, list.length() - 3)
+    println list
+    workingDir = '../'
+    commandLine 'cmd', '/c', list
+}
+task spoonAllLinux(type:Exec) {
+    def folder = "RefillRedux/src";
+    def baseDir = new File(folder);
+    def list = ""
+    baseDir.eachFile(FileType.DIRECTORIES) { dir ->
+        if (!dir.name.equals("instrumentTest") && !dir.name.equals("main"))
+            list += 'gradlew spoon' + dir.name.capitalize() + 'Test && '
+    }
+    list = list.substring(0, list.length() - 3)
+    println list
+    workingDir = '../'
+    commandLine list
 }
