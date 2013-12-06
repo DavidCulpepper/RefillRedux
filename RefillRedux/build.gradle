@@ -94,7 +94,7 @@ task linuxRetry {
     println "pwd".execute().text
     baseDir.eachFile(FileType.DIRECTORIES) { dir ->
         if (!dir.name.equals("instrumentTest") && !dir.name.equals("main")) {
-            def processName ="gradlew spoon" + dir.name.capitalize() + "Test"
+            def processName ="..\\gradlew spoon" + dir.name.capitalize() + "Test"
             doLast {
                 println processName.execute().text
             }
