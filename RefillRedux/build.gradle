@@ -96,5 +96,8 @@ task spoonAllLinux(type:Exec) {
     list = list.substring(0, list.length() - 3)
     println list
     workingDir = '../'
-    commandLine list
+    commandLine sh, '-c', list
 }
+
+
+
